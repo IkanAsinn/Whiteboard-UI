@@ -19,6 +19,8 @@ export interface LibraryIcon {
   name: string;
   category: string;
   svg: string;
+  /** The artwork already spells out the product name (e.g. SAP lockups), so no label is added. */
+  wordmark?: boolean;
 }
 
 export const ICON_DRAG_MIME = 'application/x-whiteboard-icon';
@@ -93,10 +95,11 @@ export interface IconPayload {
   name: string;
   src: string;
   aspect: number;
+  wordmark?: boolean;
 }
 
 export function iconPayload(icon: LibraryIcon): IconPayload {
-  return { name: icon.name, src: iconDataUrl(icon), aspect: svgAspect(icon.svg) };
+  return { name: icon.name, src: iconDataUrl(icon), aspect: svgAspect(icon.svg), wordmark: icon.wordmark };
 }
 
 /** Insert an icon (optionally with its product name underneath) at a world point. */
@@ -106,12 +109,14 @@ export function insertIcon(p: IconPayload, at?: Vec, withLabel = true) {
   const c = at ?? screenToWorld(viewportCenter(), s.camera);
   // Same visual area for square icons and wide wordmarks (a 5:1 logo becomes ~143×29, not 64×13).
   const size = 64 / z;
-  const aspect = Math.min(Math.max(p.aspect, 1 / 6), 6);
-  const w = size * Math.sqrt(aspect);
-  const h = size / Math.sqrt(aspect);
+  // Extreme ratios are capped for sizing only; the artwork keeps its true proportions.
+  const a = p.aspect || 1;
+  // Wordmarks (SAP lockups) share one height so their lettering matches, however long the name.
+  const w = p.wordmark ? (28 / z) * a : a >= 1 ? size * Math.sqrt(Math.min(a, 6)) : (size / Math.sqrt(Math.max(a, 1 / 6))) * a;
+  const h = w / a;
   const image: BoardElement = { id: newId(), type: 'image', color: '', x: c.x - w / 2, y: c.y - h / 2, w, h, src: p.src };
   const els: BoardElement[] = [image];
-  if (withLabel) {
+  if (withLabel && !p.wordmark) {
     const fontSize = 14 / z;
     const m = measureText(p.name, fontSize);
     els.push({

@@ -11,7 +11,8 @@ It is a static web app: **the server never receives or stores board data.**
 - **Text, sticky notes** (auto-fit text), rectangles, ellipses, lines, arrows (Shift = square/circle/45°).
 - **Icon library** (`I`): drag or click to insert icons, with the product name added underneath.
   - **Azure**: 644 official Azure Architecture Icons
-  - **SAP**: 129 SAP BTP service icons
+  - **SAP**: product logos (S/4HANA, S/4HANA Cloud, Ariba, SuccessFactors, Concur, Signavio, LeanIX, Fieldglass, BTP,
+    Business Network, Customer Experience, BW/4HANA, ECC…), 128 SAP BTP service icons and SAP's generic diagram icons
   - **Tech logos**: 2,000+ logos (databases, AWS, Google Cloud, DevOps, languages, SaaS…)
 - **Laser pointer** (`K`) with fading trail, and full-screen mode (`F`) for presenting.
 - Select, move, resize, duplicate, copy/paste (including images from the clipboard), z-order, undo/redo, image drag-and-drop.

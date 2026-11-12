@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T07:19:52.250Z",
+  "generated": "2026-11-12T08:06:46.836Z",
   "sets": [
     {
       "id": "azure",
@@ -41,12 +41,16 @@
     {
       "id": "sap",
       "name": "SAP",
-      "count": 129,
+      "count": 270,
       "categories": [
-        "SAP BTP Services"
+        "SAP Products",
+        "SAP BTP Services",
+        "Generic Icons (Highlight)",
+        "Generic Icons (Non-SAP)",
+        "Generic Icons (SAP)"
       ],
       "source": "https://github.com/SAP/btp-solution-diagrams",
-      "license": "Apache-2.0 (SAP SE)",
+      "license": "Apache-2.0 (SAP SE). SAP and SAP product names are trademarks of SAP SE.",
       "file": "sap.json"
     },
     {
