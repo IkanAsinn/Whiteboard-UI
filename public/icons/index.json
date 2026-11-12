@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T08:06:46.836Z",
+  "generated": "2026-11-12T08:17:01.207Z",
   "sets": [
     {
       "id": "azure",
@@ -36,7 +36,8 @@
       ],
       "source": "https://learn.microsoft.com/azure/architecture/icons/",
       "license": "Microsoft Azure Architecture Icons — permitted for architecture diagrams, training materials and documentation.",
-      "file": "azure.json"
+      "file": "azure.json",
+      "version": "8160d8bf4694"
     },
     {
       "id": "sap",
@@ -51,7 +52,8 @@
       ],
       "source": "https://github.com/SAP/btp-solution-diagrams",
       "license": "Apache-2.0 (SAP SE). SAP and SAP product names are trademarks of SAP SE.",
-      "file": "sap.json"
+      "file": "sap.json",
+      "version": "894f652a57a1"
     },
     {
       "id": "logos",
@@ -69,7 +71,8 @@
       ],
       "source": "https://github.com/gilbarbara/logos",
       "license": "CC0-1.0 (artwork). Logos are trademarks of their respective owners.",
-      "file": "logos.json"
+      "file": "logos.json",
+      "version": "c8d8585c7001"
     }
   ]
 }

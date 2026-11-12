@@ -12,6 +12,8 @@ export interface IconSetInfo {
   source: string;
   license: string;
   file: string;
+  /** Content hash of the set file, used as a cache buster. */
+  version?: string;
 }
 
 export interface LibraryIcon {
@@ -30,7 +32,8 @@ let indexPromise: Promise<IconSetInfo[]> | null = null;
 const setCache = new Map<string, Promise<LibraryIcon[]>>();
 
 export function loadIconIndex(): Promise<IconSetInfo[]> {
-  indexPromise ??= fetch(`${base}icons/index.json`)
+  // Always revalidate the small index (ETag → usually a 304); the big set files are versioned below.
+  indexPromise ??= fetch(`${base}icons/index.json`, { cache: 'no-cache' })
     .then((r) => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
@@ -46,7 +49,7 @@ export function loadIconIndex(): Promise<IconSetInfo[]> {
 export function loadIconSet(info: IconSetInfo): Promise<LibraryIcon[]> {
   let p = setCache.get(info.id);
   if (!p) {
-    p = fetch(`${base}icons/${info.file}`)
+    p = fetch(`${base}icons/${info.file}${info.version ? `?v=${info.version}` : ''}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

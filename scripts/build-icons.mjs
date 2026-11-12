@@ -18,6 +18,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
 import { unzipSync, strFromU8 } from 'fflate';
 
 const require = createRequire(import.meta.url);
@@ -321,13 +322,26 @@ for (const [id, build] of Object.entries(builders)) {
     const { keepCategoryOrder, ...data } = set;
     const categories = [...new Set(set.icons.map((i) => i.category))];
     if (!keepCategoryOrder) categories.sort();
-    await writeFile(join(outDir, `${id}.json`), JSON.stringify(data));
+    const json = JSON.stringify(data);
+    await writeFile(join(outDir, `${id}.json`), json);
+    // Content hash: the app requests <id>.json?v=<version>, so browsers fetch new icons as soon as they change.
+    const version = createHash('sha256').update(json).digest('hex').slice(0, 12);
     index = index.filter((s) => s.id !== id);
-    index.push({ id, name: set.name, count: set.icons.length, categories, source: set.source, license: set.license, file: `${id}.json` });
+    index.push({ id, name: set.name, count: set.icons.length, categories, source: set.source, license: set.license, file: `${id}.json`, version });
     console.log(`${set.name}: ${set.icons.length} icons in ${categories.length} categories`);
   } catch (e) {
     console.error(`Failed to build ${id}:`, e.message);
     process.exitCode = 1;
+  }
+}
+
+// Sets built by an older script (or skipped this run) still get a version from their file on disk.
+for (const s of index) {
+  if (s.version) continue;
+  try {
+    s.version = createHash('sha256').update(await readFile(join(outDir, s.file), 'utf8')).digest('hex').slice(0, 12);
+  } catch {
+    /* file missing: leave unversioned */
   }
 }
 
