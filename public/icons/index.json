@@ -1,0 +1,71 @@
+{
+  "generated": "2026-11-12T07:19:52.250Z",
+  "sets": [
+    {
+      "id": "azure",
+      "name": "Azure",
+      "count": 644,
+      "categories": [
+        "Ai + Machine Learning",
+        "Analytics",
+        "App Services",
+        "Azure Ecosystem",
+        "Blockchain",
+        "Compute",
+        "Containers",
+        "Databases",
+        "Developer Tools",
+        "Devops",
+        "General",
+        "Hybrid + Multicloud",
+        "Identity",
+        "Integration",
+        "Intune",
+        "Iot",
+        "Management + Governance",
+        "Menu",
+        "Migrate",
+        "Mixed Reality",
+        "Monitor",
+        "Networking",
+        "New Icons",
+        "Other",
+        "Security",
+        "Storage",
+        "Web"
+      ],
+      "source": "https://learn.microsoft.com/azure/architecture/icons/",
+      "license": "Microsoft Azure Architecture Icons — permitted for architecture diagrams, training materials and documentation.",
+      "file": "azure.json"
+    },
+    {
+      "id": "sap",
+      "name": "SAP",
+      "count": 129,
+      "categories": [
+        "SAP BTP Services"
+      ],
+      "source": "https://github.com/SAP/btp-solution-diagrams",
+      "license": "Apache-2.0 (SAP SE)",
+      "file": "sap.json"
+    },
+    {
+      "id": "logos",
+      "name": "Tech logos",
+      "count": 2066,
+      "categories": [
+        "AWS",
+        "Databases",
+        "DevOps & Infra",
+        "Google Cloud",
+        "Languages & Frameworks",
+        "Messaging & Streaming",
+        "Microsoft",
+        "Products & Brands"
+      ],
+      "source": "https://github.com/gilbarbara/logos",
+      "license": "CC0-1.0 (artwork). Logos are trademarks of their respective owners.",
+      "file": "logos.json"
+    }
+  ]
+}
